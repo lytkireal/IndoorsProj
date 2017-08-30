@@ -119,7 +119,6 @@ class GitHubAPIManager {
     //                              *** received code is NOT EMPTY ***
     //---------------------------------------------------------------------------------------------------------------
     if let receivedCode = code {
-      
       let getTokenPath:String = "https://github.com/login/oauth/access_token"
       let tokenParams = ["client_id": clientID, "client_secret": clientSecret, "code": receivedCode]
       

@@ -8,13 +8,16 @@
 
 import UIKit
 
+import Alamofire
+import SwiftyJSON
+
 protocol ReposViewControllerDelegate: class {
   
   func tableViewControllerSignOut(_ controller: ReposViewController)
   
 }
 
-class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SingleRepoViewControllerDelegate{
+class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SingleRepoViewControllerDelegate, RepoCommitsViewControllerDelegate {
   
   @IBOutlet var tableView: UITableView!
   //var repos: [Repo]
@@ -35,13 +38,24 @@ class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDat
   //                      *** Implementation of ReposViewControllerDelegate methods ***
   //-----------------------------------------------------------------------------------------------
   //
-  // - sign out
   
   func singleRepoViewControllerDidCancel(_ controller: SingleRepoViewController) {
     dismiss(animated: true, completion: nil)
   }
   
   //-----------------------------------------------------------------------------------------------
+  
+  //-----------------------------------------------------------------------------------------------
+  //                      *** Implementation of RepoCommitsViewControllerDelegate methods ***
+  //-----------------------------------------------------------------------------------------------
+  //
+  
+  func repoCommitsViewControllerDidCancel(_ controller: RepoCommitsViewController) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+  
   
   //-----------------------------------------------------------------------------------------------
   //                      *** Prepare-for-segue ***
@@ -61,6 +75,17 @@ class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDat
       }
     }
     
+    if segue.identifier == "Commits" {
+      
+      let navigationController = segue.destination as! UINavigationController
+      let controller = navigationController.topViewController as! RepoCommitsViewController
+      
+      controller.delegate = self
+      
+      if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+        controller.commitsURL = listOfRepos[indexPath.row].commitsURL
+      }
+    }
   }
   //-----------------------------------------------------------------------------------------------
   
@@ -127,6 +152,10 @@ class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
   }
   //-------------------------------------------------------------------------------------------------------------
+  
+  
+  
+
   
 
 }

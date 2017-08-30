@@ -91,7 +91,7 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
       if let receivedError = error {
         print(receivedError)
       } else {
-        print("fetchedRepos")
+        print("*** fetchedRepos ***")
         print(fetchedRepos!)
         
         let repoArr = fetchedRepos! as Array
@@ -118,21 +118,21 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
   // Array parser
   func parse(reposArray: Array<Any>) -> [Repo] {
     print("*** parse dictionary ***")
-    print(reposArray)
+    //print(reposArray)
     
     var repos: [Repo] = []
     
     for repo in reposArray {
-      print(repo)
+      //print(repo)
       let eachRepo = repo as! NSDictionary
-      print(eachRepo.allKeys)
+      //print(eachRepo.allKeys)
       
       var repoItem: Repo!
       repoItem = self.parse(app: eachRepo as! [String : Any])
       
       if let result = repoItem {
         repos.append(result)
-        print("ProductItem name is '\(result.name)'")
+        print("Repo name is '\(result.name)'")
       }
       
     }
@@ -148,9 +148,9 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
     repoItem.name = dictionary["name"] as! String
     let owner = dictionary["owner"] as! [String: Any]
     repoItem.ownerLogin = owner["login"] as! String
-    repoItem.url = dictionary["url"] as! String
     repoItem.forks = dictionary["forks"] as! Int
     repoItem.watches = dictionary["watchers_count"] as! Int
+    repoItem.commitsURL = dictionary["url"] as! String
     
     
     return repoItem

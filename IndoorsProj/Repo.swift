@@ -16,23 +16,17 @@ class Repo {
   var name = ""
   var description = ""
   var ownerLogin = ""
-  var url = ""
   var forks = 0
   var watches = 0
+  var commitsURL = ""
   
-//  required init(json: JSON) {
-//    self.description = json["description"].string
-//    self.id = json["id"].string
-//    self.name = json["name"].string
-//    self.ownerLogin = json["owner"]["login"].string
-//    self.url = json["url"].string
-//  }
+  
   
   class func getMyRepos(completionHandler: @escaping (Array<Any>?, Any?) -> Void) {
     let path = "https://api.github.com/user/repos"
     
-    if let head = GitHubAPIManager.sharedInstance.OAuthToken {
-      print (head)
+    if GitHubAPIManager.sharedInstance.OAuthToken != nil {
+      //print (head)
       
       let headers: HTTPHeaders = [
       "Authorization": "token \(GitHubAPIManager.sharedInstance.OAuthToken!)"
@@ -47,14 +41,14 @@ class Repo {
           }
           
           if let receivedResults = response.result.value as? Array<Any>{
-            print(receivedResults)
+            //print(receivedResults)
             completionHandler(receivedResults, nil)
           }
       }
     }
-    
   }
   
+
 }
 
 
