@@ -35,8 +35,9 @@ class Repo {
 
       GitHubAPIManager.sharedInstance.sessionManager.request(path, headers: headers).responseJSON { response in
           if let anError = response.result.error {
-            completionHandler(nil, anError)
+            completionHandler(nil, anError.localizedDescription)
             print(anError)
+            
             return
           }
           

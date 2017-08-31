@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0c6-yA-kfG" id="S47-x8-2SV">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcq-P8-2dN">
@@ -57,7 +57,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Repositories" id="RM4-nu-e7h"/>
+                    <navigationItem key="navigationItem" title="Repositories" id="RM4-nu-e7h">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="Neq-lk-YfE"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hhd-qv-nRo" id="V6d-ts-Sph"/>
                     </connections>
@@ -75,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Commit" rowHeight="115" id="R8x-AR-uy4">
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Commit" rowHeight="115" id="R8x-AR-uy4">
                                 <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R8x-AR-uy4" id="ydS-hj-5sc">
@@ -125,7 +127,13 @@
                             <outlet property="delegate" destination="X2I-84-C0V" id="NrJ-iq-dL3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="U1q-SW-pUV"/>
+                    <navigationItem key="navigationItem" id="U1q-SW-pUV">
+                        <barButtonItem key="leftBarButtonItem" title="Reos" id="YTW-xJ-Baq">
+                            <connections>
+                                <action selector="cancel" destination="X2I-84-C0V" id="TP0-bx-eph"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2NU-H1-zFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,7 +9,7 @@
 import UIKit
 
 class SignInViewController: UIViewController, ReposViewControllerDelegate {
-
+  
   var repos: [Repo] = []
   
     override func viewDidLoad() {
@@ -49,13 +49,15 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
     //UserDefaults.standard.set(false, forKey: "loadingOAuthToken")
     //GitHubAPIManager.sharedInstance.OAuthToken = nil
     //print(UserDefaults.standard.bool(forKey: "loadingOAuthToken"))
-    
     if (!UserDefaults.standard.bool(forKey: "loadingOAuthToken")) {
       loadInitialData()
     }
   }
   
-  
+  //-----------------------------------------------------------------------------------------------
+  //                      *** Load initial data ***
+  //-----------------------------------------------------------------------------------------------
+  //
   func loadInitialData() {
     print("in loadInitialData()")
     
@@ -66,7 +68,10 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
         (error) -> Void in
         
         if let receivedError = error {
+          print("*** Error in loadInitialData -> OAuthTokenCompletionHandler ***")
           print(receivedError)
+          //let errorText = receivedError.
+          //errorHandler(receivedError: receivedError)
           
         } else {
           print("*** there is NOT oauth token ***")
@@ -90,6 +95,10 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
       
       if let receivedError = error {
         print(receivedError)
+        let errorText = String(describing: receivedError)
+        print(errorText)
+        self.errorHandler(receivedError: errorText)
+      
       } else {
         print("*** fetchedRepos ***")
         print(fetchedRepos!)
@@ -177,6 +186,20 @@ class SignInViewController: UIViewController, ReposViewControllerDelegate {
     
   }
   //-----------------------------------------------------------------------------------------------
+  func errorHandler(receivedError: String) {
+    let vc = self.view.window?.rootViewController
+    DispatchQueue.main.async {
+      let alert = UIAlertController(
+        title: "Nooooo...",
+        message: "\(receivedError)",
+        preferredStyle: .alert)
+      
+      let action = UIAlertAction(title: "ok", style: .default, handler: nil)
+      alert.addAction(action)
+      
+      vc?.present(alert, animated: true, completion: nil)
+    }
+  }
 }
 
 

@@ -19,14 +19,16 @@ class RepoCommitsViewController: UITableViewController {
   
   var allCommits: [Commit] = []
   
-  
-  
   weak var delegate: ReposViewController?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.getRepoCommit()
 
+  }
+  
+  @IBAction func cancel() {
+    delegate?.repoCommitsViewControllerDidCancel(self)
   }
 
   override func didReceiveMemoryWarning() {
